@@ -1,0 +1,20 @@
+.exchange-kiev {
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  background: #009af8;
+  color: #fff;
+  font-size: 2rem;
+  text-transform: uppercase;
+  padding: 0.5rem;
+
+  a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+
+    &:hover {
+      color: darken(#fff, 20);
+    }
+  }
+}

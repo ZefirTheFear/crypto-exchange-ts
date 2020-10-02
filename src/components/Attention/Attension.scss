@@ -1,0 +1,50 @@
+@import "../../_variables.scss";
+
+.attention {
+  position: fixed;
+  top: 60px;
+  width: 100%;
+  background: $attention-bg;
+  color: $attention-color;
+  border-bottom: 1px solid #fff;
+  z-index: 3;
+}
+
+.attention__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  text-align: center;
+  width: 90%;
+  padding: 0.25rem 0;
+  margin: 0 auto;
+  font-size: 0.8rem;
+
+  .attention__main {
+    margin-right: 1rem;
+  }
+}
+
+.attention__inner-contacts-link {
+  cursor: pointer;
+  color: chartreuse;
+
+  &:hover {
+    color: darken(chartreuse, 10);
+  }
+}
+
+.attention__close {
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+
+  &:hover {
+    color: darken(rgb(255, 255, 255), 10);
+  }
+
+  svg {
+    display: flex;
+  }
+}

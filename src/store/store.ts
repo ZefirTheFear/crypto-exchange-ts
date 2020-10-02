@@ -1,7 +1,8 @@
 import { createStore, combineReducers } from "redux";
 
 import currenciesReducer from "./reducers/currenciesReducer";
-import menuReducer from "./reducers/menuReducer";
+import mobileMenuReducer from "./reducers/mobileMenuReducer";
+import scrollReducer from "./reducers/scrollReducer";
 
 declare global {
   interface Window {
@@ -11,7 +12,8 @@ declare global {
 
 const rootReducer = combineReducers({
   currenciesState: currenciesReducer,
-  menuState: menuReducer
+  mobileMenuState: mobileMenuReducer,
+  scrollState: scrollReducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

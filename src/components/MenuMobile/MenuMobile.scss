@@ -1,4 +1,4 @@
-@import "../../_variables.scss";
+@import "../../utils/css/_variables.scss";
 
 .menu-mobile {
   position: fixed;
@@ -10,7 +10,7 @@
   z-index: 10;
 }
 
-.menu-mobile_opened {
+.menu-mobile_open {
   left: 0;
 }
 

@@ -1,16 +1,15 @@
-@import "../../variables.scss";
+@import "../../utils/css/_variables";
+@import "../../utils/css/_mixins";
 
 .calculator-section {
+  @include section;
   background: $calculator-bg;
   color: $calculator-color;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem 0;
+  padding: $section-padding;
 }
 
 .calculator-section__inner {
-  width: 90%;
+  @include app-inner-width;
 }
 
 .calculator {
@@ -23,146 +22,22 @@
   }
 }
 
-.calculator__from-currency-title,
-.calculator__to-currency-title {
-  font-size: 2rem;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-}
-
-.calculator__from-currency-select-wrapper,
-.calculator__to-currency-select-wrapper {
-  position: relative;
-}
-
-.calculator__from-currency-select-wrapper_opened,
-.calculator__to-currency-select-wrapper_opened {
-  .calculator__from-currency-select-options {
-    // height: 152px;
-    height: auto;
-  }
-  .calculator__to-currency-select-options {
-    // height: 102px;
-    height: auto;
-  }
-  .calculator__from-currency-select-arrow,
-  .calculator__to-currency-select-arrow {
-    transform: rotate(-180deg);
-  }
-}
-
-.calculator__from-currency-select-default,
-.calculator__to-currency-select-default {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 250px;
-  height: 50px;
-  background: $calculator-color;
-  color: $calculator-bg;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: $main-transition;
-
-  &:hover {
-    .calculator__from-currency-select-arrow,
-    .calculator__to-currency-select-arrow {
-      color: lighten($calculator-bg, 20);
-    }
-  }
-}
-
-.calculator__from-currency-img,
-.calculator__to-currency-img {
-  height: 80%;
-  margin: 0 10px;
-}
-
-.calculator__from-currency-name,
-.calculator__to-currency-name {
-  font-size: 2rem;
-}
-
-.calculator__from-currency-select-arrow,
-.calculator__to-currency-select-arrow {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: auto;
-  font-size: 2rem;
-  transition: $main-transition;
-}
-
-.calculator__from-currency-select-options,
-.calculator__to-currency-select-options {
-  position: absolute;
-  height: 0;
-  overflow: hidden;
-  margin-top: 0.5rem;
-  z-index: 2;
-  color: $calculator-bg;
-  background: $calculator-color;
-  border-radius: 5px;
-  border: 1px solid $calculator-bg;
-  width: 250px;
-  transition: $main-transition;
-}
-
-.calculator__from-currency-select-option,
-.calculator__to-currency-select-option {
-  display: flex;
-  align-items: center;
-  height: 50px;
-  border-bottom: 1px solid $calculator-bg;
-  cursor: pointer;
-
-  &:last-child {
-    border-bottom: 0;
-  }
-
-  &:hover {
-    background: darken($calculator-color, 10);
-  }
-}
-
-.calculator__from-currency-input-wrapper,
-.calculator__to-currency-input-wrapper {
-  position: relative;
-  width: 250px;
-  height: 50px;
-  margin-top: 1rem;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.calculator__from-currency-input,
-.calculator__to-currency-input {
-  position: relative;
-  left: 0;
-  width: 280px;
-  height: 100%;
-  padding: 10px 15px;
-  outline: 0;
-  border: 0;
-  font-family: "Open Sans", sans-serif;
-  font-size: 2rem;
-  color: $calculator-bg;
-
-  @media (max-width: 767px) {
-    width: 250px;
-  }
-}
-
 .calculator__swaper {
   margin: 1rem 2rem;
   font-size: 3rem;
   cursor: pointer;
   transition: $main-transition;
 
-  &:hover {
+  @mixin hover {
     color: darken($calculator-color, 20);
+  }
+  &:active {
+    @include hover;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @include hover;
+    }
   }
 
   @media (max-width: 767px) {

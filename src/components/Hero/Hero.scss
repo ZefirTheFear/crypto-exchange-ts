@@ -1,11 +1,12 @@
+@import "../../utils/css/_variables";
+
 .hero {
-  margin-top: 60px;
+  margin-top: $header-height;
   display: flex;
   justify-content: center;
   padding-top: 80px;
-  // align-items: center;
   height: 595px;
-  max-height: calc(100vh - 60px);
+  max-height: calc(100vh - #{$header-height});
   background: url(../../assets/img/hero-bg.jpg) center no-repeat;
   object-fit: contain;
 }

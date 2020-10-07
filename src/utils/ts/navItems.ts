@@ -1,15 +1,15 @@
 import { Dispatch } from "redux";
 
-import { scrollActionType } from "./../../store/actions/scrollActions/scrollActionTypes";
+import { ScrollActionType } from "./../../store/actions/scrollActions/scrollActionTypes";
 import * as scrollActions from "../../store/actions/scrollActions/scrollActionCreators";
 import * as mobileMenuActions from "../../store/actions/mobileMenuActions/mobileMenuActionCreators";
 
-const onClick = (action: scrollActionType, dispatch: Dispatch<any>) => {
+const onClick = (action: ScrollActionType, dispatch: Dispatch) => {
   dispatch(mobileMenuActions.closeMobileMenu());
   dispatch(action);
 };
 
-export default (dispatch: Dispatch<any>) => [
+export default (dispatch: Dispatch) => [
   {
     title: "калькулятор",
     onClick: () => {

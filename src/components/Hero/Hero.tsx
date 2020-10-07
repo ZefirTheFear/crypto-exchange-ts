@@ -2,9 +2,10 @@ import React from "react";
 
 import logo from "../../assets/img/logo_img.svg";
 import logoWords from "../../assets/img/logo_words.svg";
+
 import "./Hero.scss";
 
-const Hero = () => {
+const Hero: React.FC = () => {
   return (
     <section className="hero">
       <div className="hero__inner">

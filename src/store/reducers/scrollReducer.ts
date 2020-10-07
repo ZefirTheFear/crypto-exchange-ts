@@ -1,20 +1,20 @@
 import * as scrollActionTypes from "../actions/scrollActions/scrollActionTypes";
 
-interface scrollState {
+interface ScrollState {
   scrollToCalc: number;
   scrollToExchange: number;
   scrollToAboutUs: number;
   scrollToContacts: number;
 }
 
-const initialState: scrollState = {
+const initialState: ScrollState = {
   scrollToCalc: 0,
   scrollToExchange: 0,
   scrollToAboutUs: 0,
   scrollToContacts: 0
 };
 
-export default (state = initialState, action: scrollActionTypes.scrollActionType): scrollState => {
+export default (state = initialState, action: scrollActionTypes.ScrollActionType): ScrollState => {
   switch (action.type) {
     case scrollActionTypes.SCROLL_TO_CALC:
       return { ...state, scrollToCalc: state.scrollToCalc + 1 };

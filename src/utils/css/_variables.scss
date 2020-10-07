@@ -1,6 +1,9 @@
-$main-transition: all 0.2s ease-out;
-$menu-btn-transition: all 0.5s ease-out;
-$mobile-menu-transition: all 0.3s ease-out;
+// metrics
+$app-inner-width: 90%;
+$header-height: 60px;
+$section-padding: 2rem 0;
+
+// colors
 $menu-bg: #222b33;
 $menu-color: #fff;
 $menu-hover: #009af8;
@@ -20,3 +23,12 @@ $invalid: #ff5588;
 $attention-bg: #ff0000;
 $attention-color: #ffffff;
 // $invalid: #ff2058;
+
+// transitions
+$main-transition: all 0.15s ease-out;
+$menu-btn-transition: all 0.3s ease-out;
+$mobile-menu-transition: all 0.3s ease-out;
+
+// z-i
+$header-z-i: 10;
+$mob-menu-z-i: 10;

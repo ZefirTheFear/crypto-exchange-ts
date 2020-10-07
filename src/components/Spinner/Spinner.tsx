@@ -4,7 +4,7 @@ import spinner from "../../assets/img/spinner.svg";
 
 import "./Spinner.scss";
 
-const Spinner = () => {
+const Spinner: React.FC = () => {
   return (
     <div className="spinner">
       <img src={spinner} alt="spinner" />

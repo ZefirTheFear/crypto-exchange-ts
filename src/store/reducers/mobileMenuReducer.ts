@@ -1,17 +1,17 @@
 import * as mobileMenuActionsTypes from "../actions/mobileMenuActions/mobileMenuActionTypes";
 
-interface mobileMenuState {
+interface MobileMenuState {
   isOpen: boolean;
 }
 
-const initialState: mobileMenuState = {
+const initialState: MobileMenuState = {
   isOpen: false
 };
 
 export default (
   state = initialState,
   action: mobileMenuActionsTypes.MobileMenuActionType
-): mobileMenuState => {
+): MobileMenuState => {
   switch (action.type) {
     case mobileMenuActionsTypes.OPEN_MOBILE_MENU:
       return { ...state, isOpen: true };

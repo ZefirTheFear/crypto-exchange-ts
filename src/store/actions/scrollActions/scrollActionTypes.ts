@@ -19,4 +19,4 @@ export interface ScrollToContacts {
   type: typeof SCROLL_TO_CONTACTS;
 }
 
-export type scrollActionType = ScrollToCalc | ScrollToExchange | ScrollToAboutUs | ScrollToContacts;
+export type ScrollActionType = ScrollToCalc | ScrollToExchange | ScrollToAboutUs | ScrollToContacts;

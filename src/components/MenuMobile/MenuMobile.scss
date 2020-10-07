@@ -1,13 +1,13 @@
-@import "../../utils/css/_variables.scss";
+@import "../../utils/css/_variables";
 
 .menu-mobile {
   position: fixed;
-  top: 60px;
+  top: $header-height;
   left: -100%;
   width: 100%;
   background: $menu-bg;
   transition: $mobile-menu-transition;
-  z-index: 10;
+  z-index: $mob-menu-z-i;
 }
 
 .menu-mobile_open {
@@ -19,13 +19,22 @@
   justify-content: center;
   align-items: center;
   height: 100px;
-  max-height: calc((100vh - 60px) / 4);
+  max-height: calc((100vh - #{$header-height}) / 4);
   color: $menu-color;
   text-transform: uppercase;
   border-bottom: 1px solid $border;
   cursor: pointer;
+  transition: $main-transition;
 
-  &:hover {
+  @mixin hover {
     color: $menu-hover;
+  }
+  &:active {
+    @include hover;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @include hover;
+    }
   }
 }

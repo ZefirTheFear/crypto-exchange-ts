@@ -1,8 +1,9 @@
-@import "../../_variables.scss";
+@import "../../utils/css/_variables";
+@import "../../utils/css/_mixins";
 
 .attention {
   position: fixed;
-  top: 60px;
+  top: $header-height;
   width: 100%;
   background: $attention-bg;
   color: $attention-color;
@@ -11,12 +12,12 @@
 }
 
 .attention__inner {
+  @include app-inner-width;
   display: flex;
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
   text-align: center;
-  width: 90%;
   padding: 0.25rem 0;
   margin: 0 auto;
   font-size: 0.8rem;
@@ -30,8 +31,16 @@
   cursor: pointer;
   color: chartreuse;
 
-  &:hover {
+  @mixin hover {
     color: darken(chartreuse, 10);
+  }
+  &:active {
+    @include hover;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @include hover;
+    }
   }
 }
 
@@ -40,8 +49,16 @@
   color: rgb(255, 255, 255);
   font-size: 1.5rem;
 
-  &:hover {
+  @mixin hover {
     color: darken(rgb(255, 255, 255), 10);
+  }
+  &:active {
+    @include hover;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @include hover;
+    }
   }
 
   svg {

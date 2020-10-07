@@ -1,12 +1,21 @@
-import React, { useContext } from "react";
+import React, { useCallback } from "react";
 import { IoIosCloseCircle } from "react-icons/io";
+import { useDispatch } from "react-redux";
 
-import Context from "../../context";
+import * as scrollActions from "../../store/actions/scrollActions/scrollActionCreators";
 
 import "./Attension.scss";
 
-const Attension = ({ closeAttention }) => {
-  const context = useContext(Context);
+interface AttensionProps {
+  closeAttention: () => void;
+}
+
+const Attension: React.FC<AttensionProps> = ({ closeAttention }) => {
+  const dispatch = useDispatch();
+
+  const scrollToContacts = useCallback(() => {
+    dispatch(scrollActions.scrollToContacts());
+  }, [dispatch]);
 
   return (
     <>
@@ -14,12 +23,7 @@ const Attension = ({ closeAttention }) => {
         <div className="attention__inner">
           <div className="attention__main">
             для предотвращения случаев мошенничества используйте для связи только{" "}
-            <span
-              className="attention__inner-contacts-link"
-              onClick={() => {
-                context.scrollTo(document.querySelector(".contacts"));
-              }}
-            >
+            <span className="attention__inner-contacts-link" onClick={scrollToContacts}>
               контакты
             </span>
             , указанные у нас на сайте

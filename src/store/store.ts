@@ -1,6 +1,6 @@
 import { createStore, combineReducers } from "redux";
 
-import currenciesReducer from "./reducers/currenciesReducer";
+import currencyReducer from "./reducers/currencyReducer";
 import mobileMenuReducer from "./reducers/mobileMenuReducer";
 import scrollReducer from "./reducers/scrollReducer";
 
@@ -11,7 +11,7 @@ declare global {
 }
 
 const rootReducer = combineReducers({
-  currenciesState: currenciesReducer,
+  currenciesState: currencyReducer,
   mobileMenuState: mobileMenuReducer,
   scrollState: scrollReducer
 });

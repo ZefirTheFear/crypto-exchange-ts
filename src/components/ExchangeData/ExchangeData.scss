@@ -6,7 +6,7 @@
   height: 50px;
   background: $calculator-color;
   color: $calculator-bg;
-  border-radius: 5px;
+  border-radius: $border-radius;
   transition: $main-transition;
 }
 
@@ -19,7 +19,7 @@
 .exchange-data__selected {
   @include data;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -71,6 +71,7 @@
   margin-top: -5px;
   border: 1px solid $calculator-bg;
   overflow: hidden;
+  z-index: 1;
 }
 
 .exchange-data__select-options-item {
@@ -103,12 +104,4 @@
   padding: 10px 15px;
   font-size: 2rem;
   color: $calculator-bg;
-  // position: relative;
-  // left: 0;
-  // width: 280px;
-  // height: 100%;
-
-  // @media (max-width: 767px) {
-  //   width: 250px;
-  // }
 }

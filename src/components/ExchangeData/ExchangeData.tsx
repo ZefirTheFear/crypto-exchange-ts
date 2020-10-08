@@ -1,9 +1,10 @@
-import React, { useState, useRef, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useRef, useCallback, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import { FaAngleDown } from "react-icons/fa";
 
 import { Currency } from "../../models/currency";
+import { RootState } from "../../store/store";
 import * as currencyActions from "../../store/actions/currencyActions/currencyActionCreators";
 
 import "./ExchangeData.scss";
@@ -25,9 +26,14 @@ const ExchangeData: React.FC<ExchangeDataProps> = ({
   value,
   onChangeInputAmount
 }) => {
+  console.log("ExchangeData render");
+
   const dispatch = useDispatch();
 
+  const closeOptions = useSelector((state: RootState) => state.currenciesState.closeOptions);
+
   const sectionsListElem = useRef<HTMLDivElement>(null!);
+  const isMount = useRef(false);
 
   const [isOpenedOptions, setIsOpenedOptions] = useState(false);
 
@@ -49,6 +55,13 @@ const ExchangeData: React.FC<ExchangeDataProps> = ({
     setIsOpenedOptions((prevState) => !prevState);
   }, [isOpenedOptions]);
 
+  const closeCurrenciesOptions = useCallback(() => {
+    const elem = sectionsListElem.current;
+    elem.style.height = "0";
+    elem.style.marginTop = "";
+    setIsOpenedOptions(false);
+  }, []);
+
   const selectCurrency = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       const currencyName = e.currentTarget.getAttribute("data-name")!;
@@ -62,6 +75,13 @@ const ExchangeData: React.FC<ExchangeDataProps> = ({
     },
     [dispatch, options, status, toggleIsOpenedOptions]
   );
+
+  useEffect(() => {
+    if (isMount.current) {
+      closeCurrenciesOptions();
+    }
+    isMount.current = true;
+  }, [closeOptions, closeCurrenciesOptions]);
 
   return (
     <div className="exchange-data">

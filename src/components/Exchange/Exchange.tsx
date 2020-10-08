@@ -12,6 +12,8 @@ import { scrollToNode } from "../../utils/ts/helperFunctions";
 import "./Exchange.scss";
 
 const Exchange: React.FC = () => {
+  console.log("Exchange render");
+
   const dispatch = useDispatch();
 
   const exchangeSection = useRef<HTMLElement>(null!);
@@ -24,6 +26,7 @@ const Exchange: React.FC = () => {
   const [isNameValid, setIsNameValid] = useState(true);
   const [isNumberValid, setIsNumberValid] = useState(true);
 
+  const [isFetchingError, setIsFetchingError] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -73,8 +76,7 @@ const Exchange: React.FC = () => {
         );
         if (response.status !== 200) {
           setIsLoading(false);
-          // return context.setIsError(true);
-          return console.log("oops");
+          return setIsFetchingError(true);
         }
         setName("");
         setNumber("");
@@ -82,14 +84,14 @@ const Exchange: React.FC = () => {
         setIsModalOpen(true);
       } catch (error) {
         setIsLoading(false);
-        // return context.setIsError(true);
-        return console.log("oops");
+        return setIsFetchingError(true);
       }
     },
     [name, number]
   );
 
   const closeModal = useCallback(() => {
+    setIsFetchingError(false);
     setIsModalOpen(false);
   }, []);
 
@@ -100,64 +102,67 @@ const Exchange: React.FC = () => {
     isMount.current = true;
   }, [scrollToExchange]);
 
+  if (isFetchingError) {
+    return <Modal closeModal={closeModal} text="что-то пошло не так. попробуйте еще раз" />;
+  }
+
+  if (isModalOpen) {
+    return <Modal closeModal={closeModal} text="данные отправлены" />;
+  }
+
   return (
-    <>
-      {isModalOpen ? <Modal closeModal={closeModal} text="данные отправлены" /> : null}
-      <section className="exchange" ref={exchangeSection}>
-        <div className="exchange__inner">
-          <div className="exchange__desc">
-            для обмена криптовалюты свяжитесь с нами по данным из{" "}
-            <span className="exchange__contact-link" onClick={scrollToContacts}>
-              контактов
-            </span>{" "}
-            или оставьте свои и мы вам перезвоним
-          </div>
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <form className="exchange__form" onSubmit={sendData}>
-              <div className="exchange__inputs">
-                <div className="exchange__form-group">
-                  <input
-                    type="text"
-                    className={"exchange__input" + (isNameValid ? "" : " exchange__input_invalid")}
-                    placeholder="имя"
-                    autoComplete="off"
-                    name="name"
-                    value={name}
-                    onChange={nameOnChange}
-                    onFocus={onFocusInput}
-                  />
-                  {isNameValid ? null : <small>надо как-то себя назвать</small>}
-                </div>
-                <div className="exchange__form-group">
-                  <input
-                    type="tel"
-                    className={
-                      "exchange__input" + (isNumberValid ? "" : " exchange__input_invalid")
-                    }
-                    placeholder="телефон"
-                    autoComplete="off"
-                    name="number"
-                    value={number}
-                    onChange={numberOnChange}
-                    onFocus={onFocusInput}
-                  />
-                  {isNumberValid ? null : <small>минимум 10 знаков</small>}
-                </div>
-              </div>
-              <button type="submit" className="exchange__btn">
-                перезвоните мне
-              </button>
-            </form>
-          )}
-          <p className="exchange__error">
-            (если мы вам не перезваниваем, то, вероятно, вы ошиблись при указании номера. попробуйте
-            еще раз)
-          </p>
+    <section className="exchange" ref={exchangeSection}>
+      <div className="exchange__inner">
+        <div className="exchange__desc">
+          для обмена криптовалюты свяжитесь с нами по данным из{" "}
+          <span className="exchange__contact-link" onClick={scrollToContacts}>
+            контактов
+          </span>{" "}
+          или оставьте свои и мы вам перезвоним
         </div>
-      </section>
-    </>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <form className="exchange__form" onSubmit={sendData}>
+            <div className="exchange__inputs">
+              <div className="exchange__form-group">
+                <input
+                  type="text"
+                  className={"exchange__input" + (isNameValid ? "" : " exchange__input_invalid")}
+                  placeholder="имя"
+                  autoComplete="off"
+                  name="name"
+                  value={name}
+                  onChange={nameOnChange}
+                  onFocus={onFocusInput}
+                />
+                {isNameValid ? null : <small>надо как-то себя назвать</small>}
+              </div>
+              <div className="exchange__form-group">
+                <input
+                  type="tel"
+                  className={"exchange__input" + (isNumberValid ? "" : " exchange__input_invalid")}
+                  placeholder="телефон"
+                  autoComplete="off"
+                  name="number"
+                  value={number}
+                  onChange={numberOnChange}
+                  onFocus={onFocusInput}
+                />
+                {isNumberValid ? null : <small>минимум 10 знаков</small>}
+              </div>
+            </div>
+            <button type="submit" className="exchange__btn">
+              перезвоните мне
+            </button>
+          </form>
+        )}
+        <p className="exchange__error">
+          (если мы вам не перезваниваем, то, вероятно, вы ошиблись при указании номера. попробуйте
+          еще раз)
+        </p>
+      </div>
+    </section>
   );
 };
 

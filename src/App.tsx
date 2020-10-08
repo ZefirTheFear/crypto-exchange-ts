@@ -5,6 +5,8 @@ import Home from "./pages/Home/Home";
 import Article from "./pages/Article/Article";
 
 const App: React.FC = () => {
+  console.log("App render");
+
   return (
     <BrowserRouter>
       <Switch>

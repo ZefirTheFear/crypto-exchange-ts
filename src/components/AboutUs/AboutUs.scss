@@ -9,7 +9,7 @@
 }
 
 .about-us__inner {
-  width: 90%;
+  @include app-inner-width;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;

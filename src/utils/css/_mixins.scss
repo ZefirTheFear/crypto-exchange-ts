@@ -2,41 +2,11 @@
 
 @mixin app-inner-width {
   width: $app-inner-width;
-
-  // @media (max-width: 1199px) {
-  //   width: 80%;
-  // }
-
-  // @media (max-width: 500px) {
-  //   width: 95%;
-  // }
+  max-width: 1200px;
 }
 
 @mixin section {
   display: flex;
   justify-content: center;
+  padding: 2rem 0;
 }
-
-// @mixin button {
-//   margin-bottom: 1rem;
-//   background: $main-app-color;
-//   color: $text-color;
-//   width: 100%;
-//   outline: 0;
-//   border: 0;
-//   border-radius: $main-border-radius;
-//   padding: 0.25rem;
-//   text-transform: uppercase;
-//   cursor: pointer;
-//   transition: $main-transition;
-
-//   &:active {
-//     background: darken($main-app-color, 10);
-//   }
-
-//   @media (hover: hover) and (pointer: fine) {
-//     &:hover {
-//       background: darken($main-app-color, 10);
-//     }
-//   }
-// }

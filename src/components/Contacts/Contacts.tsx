@@ -16,6 +16,8 @@ import logo from "../../assets/img/logo_full.svg";
 import "./Contacts.scss";
 
 const Contacts: React.FC = () => {
+  console.log("Contacts render");
+
   const contactsSection = useRef<HTMLElement>(null!);
   const isMount = useRef(false);
 

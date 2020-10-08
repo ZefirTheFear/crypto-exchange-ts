@@ -1,18 +1,16 @@
 @import "../../utils/css/_variables";
+@import "../../utils/css/_mixins";
 
 .contacts {
-  padding: 2rem 0;
+  @include section;
   background: $contacts-bg;
   color: $contacts-color;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-transform: uppercase;
   font-weight: 300;
 }
 
 .contacts__inner {
-  width: 90%;
+  @include app-inner-width;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -72,7 +70,7 @@
 }
 
 .contacts__map {
-  border-radius: 5px;
+  border-radius: $border-radius;
   overflow: hidden;
 }
 

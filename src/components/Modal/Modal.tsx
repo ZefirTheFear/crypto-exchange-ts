@@ -8,6 +8,8 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ text, closeModal }) => {
+  console.log("Modal render");
+
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
   }, []);

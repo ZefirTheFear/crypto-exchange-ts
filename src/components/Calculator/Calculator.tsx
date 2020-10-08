@@ -3,8 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { FaExchangeAlt } from "react-icons/fa";
 
+import Modal from "../Modal/Modal";
 import Spinner from "../Spinner/Spinner";
 import ExchangeData from "../ExchangeData/ExchangeData";
+import TableForCalc from "../CalculatorTable/CalculatorTable";
+
+import { Currency } from "../../models/currency";
 
 import { RootState } from "../../store/store";
 import * as currencyActions from "../../store/actions/currencyActions/currencyActionCreators";
@@ -18,10 +22,10 @@ import ImgUSD from "../../assets/img/usd.png";
 import ImgUAH from "../../assets/img/uah.png";
 
 import "./Calculator.scss";
-import TableForCalc from "../CalculatorTable/CalculatorTable";
-import { Currency } from "../../models/currency";
 
 const Calculator: React.FC = () => {
+  console.log("Calculator render");
+
   const dispatch = useDispatch();
 
   const calcSection = useRef<HTMLElement>(null!);
@@ -49,6 +53,7 @@ const Calculator: React.FC = () => {
 
   const [isFetchingBinanceData, setIsFetchingBinanceData] = useState(true);
   const [isFetchingOwnData, setIsFetchingOwnData] = useState(true);
+  const [isFetchingError, setIsFetchingError] = useState(false);
 
   const changeCurrencyFromCustomerAmount = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,13 +77,11 @@ const Calculator: React.FC = () => {
         }
       });
       if (response.status !== 200) {
-        // return context.setIsError(true);
-        return console.log("oops");
+        return setIsFetchingError(true);
       }
-      // let resData: {
-      //   symbols: { BTCUSDT: { bid: number }; ETHUSDT: { bid: number } };
-      // } = await response.json();
-      let resData = await response.json();
+      let resData: {
+        symbols: { BTCUSDT: { bid: number }; ETHUSDT: { bid: number } };
+      } = await response.json();
       console.log(resData);
       const newCurrenciesFromCustomer: Currency[] = [
         {
@@ -111,8 +114,7 @@ const Calculator: React.FC = () => {
       );
       setIsFetchingBinanceData(false);
     } catch (error) {
-      // context.setIsError(true);
-      return console.log("oops");
+      return setIsFetchingError(true);
     }
   }, [dispatch]);
 
@@ -122,10 +124,12 @@ const Calculator: React.FC = () => {
         `https://exchange-currencies-obolon.firebaseio.com/currencies.json`
       );
       if (response.status !== 200) {
-        // return context.setIsError(true);
-        return console.log("oops");
+        return setIsFetchingError(true);
       }
-      let resData = await response.json();
+      let resData: {
+        cryptoPercentage: {};
+        usd: { buy: { rate: number }; sell: { rate: number } };
+      } = await response.json();
       console.log(resData);
       const newCurrenciesToCustomer: Currency[] = [
         {
@@ -145,14 +149,17 @@ const Calculator: React.FC = () => {
       // dispatch(currencyActions.setPercentages(Object.values(resData.cryptoPercentage)));
       setIsFetchingOwnData(false);
     } catch (error) {
-      // context.setIsError(true);
-      return console.log("oops");
+      return setIsFetchingError(true);
     }
   }, [dispatch]);
 
   const swapCurrencies = useCallback(() => {
     dispatch(currencyActions.swapCurrencies());
   }, [dispatch]);
+
+  const closeModal = useCallback(() => {
+    setIsFetchingError(false);
+  }, []);
 
   useEffect(() => {
     fetchBinanceData();
@@ -164,6 +171,10 @@ const Calculator: React.FC = () => {
       scrollToNode(calcSection.current);
     }
   }, [scrollToCalc]);
+
+  if (isFetchingError) {
+    return <Modal closeModal={closeModal} text="что-то пошло не так. попробуйте еще раз" />;
+  }
 
   if (isFetchingBinanceData || isFetchingOwnData) {
     return (

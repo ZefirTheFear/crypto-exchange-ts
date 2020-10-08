@@ -8,6 +8,7 @@ import ImgBTC from "../../assets/img/BTC.png";
 import ImgUSD from "../../assets/img/usd.png";
 
 interface CurrencyState {
+  closeOptions: number;
   isBuyCrypto: boolean;
   currenciesFromCustomer: Currency[];
   currenciesToCustomer: Currency[];
@@ -20,6 +21,7 @@ interface CurrencyState {
 }
 
 const initialState: CurrencyState = {
+  closeOptions: 0,
   isBuyCrypto: true,
   currenciesFromCustomer: [],
   currenciesToCustomer: [],
@@ -60,42 +62,70 @@ export default (
       return { ...state, currenciesToCustomer: action.payload.currencies };
 
     case currencyActionTypes.SET_CURRENT_CURRENCY_FROM_CUSTOMER:
-      // TODO lastModified
       const newCurrencyFromCustomer = action.payload.currency;
 
-      const newCurrencyToCustomerAmount = convertCurrency(
-        state.currencyFromCustomerAmount,
-        newCurrencyFromCustomer,
-        state.currentCurrencyToCustomer,
-        state.percentages,
-        state.isBuyCrypto,
-        "BUY"
-      );
-
-      return {
-        ...state,
-        currentCurrencyFromCustomer: action.payload.currency,
-        currencyToCustomerAmount: newCurrencyToCustomerAmount
-      };
+      if (state.lastModifiedField === "FROM") {
+        const newCurrencyToCustomerAmount = convertCurrency(
+          state.currencyFromCustomerAmount,
+          newCurrencyFromCustomer,
+          state.currentCurrencyToCustomer,
+          state.percentages,
+          state.isBuyCrypto,
+          "BUY"
+        );
+        return {
+          ...state,
+          currentCurrencyFromCustomer: action.payload.currency,
+          currencyToCustomerAmount: newCurrencyToCustomerAmount
+        };
+      } else {
+        const newCurrencyFromCustomerAmount = convertCurrency(
+          state.currencyToCustomerAmount,
+          state.currentCurrencyToCustomer,
+          newCurrencyFromCustomer,
+          state.percentages,
+          state.isBuyCrypto,
+          "SALE"
+        );
+        return {
+          ...state,
+          currentCurrencyFromCustomer: action.payload.currency,
+          currencyFromCustomerAmount: newCurrencyFromCustomerAmount
+        };
+      }
 
     case currencyActionTypes.SET_CURRENT_CURRENCY_TO_CUSTOMER:
-      // TODO lastModified
       const newCurrencyToCustomer = action.payload.currency;
 
-      const newCurrencyFromCustomerAmount = convertCurrency(
-        state.currencyToCustomerAmount,
-        newCurrencyToCustomer,
-        state.currentCurrencyFromCustomer,
-        state.percentages,
-        state.isBuyCrypto,
-        "BUY"
-      );
-
-      return {
-        ...state,
-        currentCurrencyToCustomer: action.payload.currency,
-        currencyFromCustomerAmount: newCurrencyFromCustomerAmount
-      };
+      if (state.lastModifiedField === "FROM") {
+        const newCurrencyToCustomerAmount = convertCurrency(
+          state.currencyFromCustomerAmount,
+          state.currentCurrencyFromCustomer,
+          newCurrencyToCustomer,
+          state.percentages,
+          state.isBuyCrypto,
+          "BUY"
+        );
+        return {
+          ...state,
+          currentCurrencyToCustomer: action.payload.currency,
+          currencyToCustomerAmount: newCurrencyToCustomerAmount
+        };
+      } else {
+        const newCurrencyFromCustomerAmount = convertCurrency(
+          state.currencyToCustomerAmount,
+          newCurrencyToCustomer,
+          state.currentCurrencyFromCustomer,
+          state.percentages,
+          state.isBuyCrypto,
+          "SALE"
+        );
+        return {
+          ...state,
+          currentCurrencyToCustomer: action.payload.currency,
+          currencyFromCustomerAmount: newCurrencyFromCustomerAmount
+        };
+      }
 
     case currencyActionTypes.SWAP_CURRENCIES:
       const cloneCurrenciesFromCustomer = cloneDeep(state.currenciesFromCustomer);
@@ -104,6 +134,7 @@ export default (
       const cloneCurrentCurrencyToCustomer = cloneDeep(state.currentCurrencyToCustomer);
       return {
         ...state,
+        closeOptions: state.closeOptions + 1,
         currenciesFromCustomer: cloneCurrenciesToCustomer,
         currenciesToCustomer: cloneCurrenciesFromCustomer,
         currentCurrencyFromCustomer: cloneCurrentCurrencyToCustomer,
@@ -135,7 +166,6 @@ export default (
       };
 
     case currencyActionTypes.CHANGE_CURRENCY_FROM_CUSTOMER_AMOUNT: {
-      // TODO Input Validation
       const newCurrencyToCustomerAmount = convertCurrency(
         action.payload.amount,
         state.currentCurrencyFromCustomer,
@@ -154,7 +184,6 @@ export default (
     }
 
     case currencyActionTypes.CHANGE_CURRENCY_TO_CUSTOMER_AMOUNT: {
-      // TODO Input Validation
       const newCurrencyFromCustomerAmount = convertCurrency(
         action.payload.amount,
         state.currentCurrencyToCustomer,

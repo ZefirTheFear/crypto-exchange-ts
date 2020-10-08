@@ -22,7 +22,7 @@
   width: 280px;
   background: $modal-bg;
   color: $modal-color;
-  border-radius: 5px;
+  border-radius: $border-radius;
 }
 
 .modal__text {
@@ -41,9 +41,17 @@
   font-size: 1.3rem;
   padding: 1px 5px 3px 5px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: $border-radius;
 
-  &:hover {
+  @mixin hover {
     background: lighten($modal-color, 10);
+  }
+  &:active {
+    @include hover;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @include hover;
+    }
   }
 }

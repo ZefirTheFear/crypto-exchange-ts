@@ -11,6 +11,8 @@ interface AttensionProps {
 }
 
 const Attension: React.FC<AttensionProps> = ({ closeAttention }) => {
+  console.log("Attension render");
+
   const dispatch = useDispatch();
 
   const scrollToContacts = useCallback(() => {

@@ -8,6 +8,8 @@ import { RootState } from "../../store/store";
 import "./MenuMobile.scss";
 
 const MenuMobile: React.FC = () => {
+  console.log("MenuMobile render");
+
   const dispatch = useDispatch();
 
   const isMobileMenuOpen = useSelector((state: RootState) => state.mobileMenuState.isOpen);

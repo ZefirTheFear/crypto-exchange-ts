@@ -1,7 +1,14 @@
-.table-for-calc {
+@import "../../utils/css/_variables";
+
+.table {
+  margin-top: 1rem;
+  width: 100%;
   text-transform: uppercase;
   font-size: 1.3rem;
   font-weight: 300;
+  color: $calculator-color;
+  border-radius: $border-radius;
+  overflow: hidden;
 
   @media (max-width: 767px) {
     font-size: 0.8rem;
@@ -9,81 +16,52 @@
   @media (max-width: 550px) {
     font-size: 0.65rem;
   }
-}
 
-.table-for-calc__inner {
-  max-width: 1150px;
-  margin: 0 auto;
-}
-
-.table-for-calc__currencies {
-  margin: 1rem 0;
-  display: flex;
-  justify-content: center;
-  border: 1px solid #fff;
-  border-radius: 5px;
-}
-
-.table-for-calc__currencies-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-  width: calc(100% / 3);
-  text-align: center;
-  border-right: 1px solid #fff;
-
-  &:last-child {
-    border-right: 0;
+  th {
+    background: #1a1a1a;
+    width: calc(100% / 3);
   }
-}
 
-.table-for-calc__percentage {
-  border: 1px solid #fff;
-  border-radius: 5px;
-}
+  td,
+  th {
+    vertical-align: middle;
+    padding: 0.5rem;
+    border-right: 1px solid $calculator-color;
 
-.table-for-calc__header {
-  display: flex;
-  justify-content: center;
-  border-bottom: 1px solid #fff;
-}
+    &:last-child {
+      border-right: 0;
+    }
 
-.table-for-calc__header-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-  width: calc(100% / 3);
-  text-align: center;
-  border-right: 1px solid #fff;
-
-  &:last-child {
-    border-right: 0;
+    @media (max-width: 550px) {
+      padding: 0.5rem 0.25rem;
+    }
   }
-}
 
-.table-for-calc__body-row {
-  display: flex;
-  border-bottom: 1px solid #fff;
+  tbody {
+    // color:crimson
+    tr {
+      &:nth-child(even) {
+        background: #444;
+      }
+      &:nth-child(odd) {
+        background: lighten(#444, 10);
+      }
 
-  &:last-child {
-    border-bottom: 0;
+      @mixin hover {
+        background: (green);
+      }
+      &:active {
+        @include hover;
+      }
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          @include hover;
+        }
+      }
+    }
+
+    td {
+      text-align: center;
+    }
   }
-}
-
-.table-for-calc__body-row-item {
-  padding: 5px;
-  width: calc(100% / 3);
-  text-align: center;
-  border-right: 1px solid #fff;
-
-  &:last-child {
-    border-right: 0;
-  }
-}
-
-.table-for-calc__footer {
-  padding: 5px;
-  text-align: center;
 }

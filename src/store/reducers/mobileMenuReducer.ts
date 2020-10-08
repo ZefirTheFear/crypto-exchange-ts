@@ -13,9 +13,6 @@ export default (
   action: mobileMenuActionsTypes.MobileMenuActionType
 ): MobileMenuState => {
   switch (action.type) {
-    case mobileMenuActionsTypes.OPEN_MOBILE_MENU:
-      return { ...state, isOpen: true };
-
     case mobileMenuActionsTypes.CLOSE_MOBILE_MENU:
       return { ...state, isOpen: false };
 

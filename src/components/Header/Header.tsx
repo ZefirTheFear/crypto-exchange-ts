@@ -11,6 +11,8 @@ import * as mobileMenuActions from "../../store/actions/mobileMenuActions/mobile
 import "./Header.scss";
 
 const Header: React.FC = () => {
+  console.log("Header render");
+
   const dispatch = useDispatch();
 
   const isMobileMenuOpen = useSelector((state: RootState) => state.mobileMenuState.isOpen);

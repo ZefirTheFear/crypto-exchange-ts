@@ -1,17 +1,15 @@
 @import "../../utils/css/_variables";
+@import "../../utils/css/_mixins";
 
 .exchange {
-  padding: 2rem 0;
+  @include section;
   background: $exchange-bg;
   color: $exchange-color;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-transform: uppercase;
 }
 
 .exchange__inner {
-  width: 90%;
+  @include app-inner-width;
 }
 
 .exchange__desc {
@@ -29,8 +27,16 @@
   cursor: pointer;
   color: chartreuse;
 
-  &:hover {
+  @mixin hover {
     color: darken(chartreuse, 10);
+  }
+  &:active {
+    @include hover;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @include hover;
+    }
   }
 }
 
@@ -69,7 +75,7 @@
   padding: 10px 15px;
   outline: 0;
   border: 0;
-  border-radius: 5px;
+  border-radius: $border-radius;
   font-family: "Open Sans", sans-serif;
   font-size: 2rem;
   text-transform: uppercase;
@@ -82,19 +88,27 @@
 
 .exchange__btn {
   margin: 1rem;
-  padding: 0 10px;
+  padding: 5px 10px;
   background: $calculator-bg;
   color: $exchange-color;
   border: 0;
   outline: 0;
-  border-radius: 5px;
+  border-radius: $border-radius;
   font-family: "Open Sans", sans-serif;
   font-size: 2rem;
   text-transform: uppercase;
   cursor: pointer;
 
-  &:hover {
+  @mixin hover {
     background: darken($calculator-bg, 10);
+  }
+  &:active {
+    @include hover;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @include hover;
+    }
   }
 
   @media (max-width: 767px) {

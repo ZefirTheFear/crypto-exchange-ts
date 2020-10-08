@@ -1,16 +1,30 @@
 import { Currency } from "./../../models/currency";
 import { Percentage } from "./../../store/actions/currencyActions/currencyActionTypes";
 
+import globalStyles from "../../utils/css/_variables.scss";
+
+export const validate = (value: string) => {
+  if (+value < 0) {
+    return (+value * -1).toString();
+  } else {
+    return value;
+  }
+};
+
 export const convertCurrency = (
-  amount: number,
+  amount: string,
   inputFieldCurrency: Currency,
   outputFieldCurrency: Currency,
   percentages: Percentage[],
   isBuyCrypto: boolean,
   operationType: "BUY" | "SALE"
 ) => {
+  if (amount === "") {
+    return "";
+  }
   const totalValue =
-    amount * (operationType === "BUY" ? inputFieldCurrency.valueBuy : inputFieldCurrency.valueSale);
+    +validate(amount) *
+    (operationType === "BUY" ? inputFieldCurrency.valueBuy : inputFieldCurrency.valueSale);
   const outputCurrencyValue =
     operationType === "BUY" ? outputFieldCurrency.valueSale : outputFieldCurrency.valueBuy;
   let percentage =
@@ -52,4 +66,12 @@ export const convertCurrency = (
       .toString();
   }
   return convertedValue;
+};
+
+export const scrollToNode = (node: HTMLElement) => {
+  const headerOffset = parseInt(globalStyles.headerHeight);
+  window.scrollTo({
+    top: window.pageYOffset + node.getBoundingClientRect().top - headerOffset,
+    behavior: "smooth"
+  });
 };

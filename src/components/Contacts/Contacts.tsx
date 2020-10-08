@@ -1,4 +1,5 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaTelegramPlane } from "react-icons/fa";
@@ -6,11 +7,20 @@ import { FaPhone } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { FaClock } from "react-icons/fa";
 
+import { RootState } from "../../store/store";
+
+import { scrollToNode } from "../../utils/ts/helperFunctions";
+
 import logo from "../../assets/img/logo_full.svg";
 
 import "./Contacts.scss";
 
-const Contacts = () => {
+const Contacts: React.FC = () => {
+  const contactsSection = useRef<HTMLElement>(null!);
+  const isMount = useRef(false);
+
+  const scrollToContacts = useSelector((state: RootState) => state.scrollState.scrollToContacts);
+
   const clickUnit = useCallback((link: string) => {
     window.open(link);
   }, []);
@@ -48,8 +58,15 @@ const Contacts = () => {
     ];
   }, [clickUnit]);
 
+  useEffect(() => {
+    if (isMount.current && contactsSection.current) {
+      scrollToNode(contactsSection.current);
+    }
+    isMount.current = true;
+  }, [scrollToContacts]);
+
   return (
-    <section className="contacts">
+    <section className="contacts" ref={contactsSection}>
       <div className="contacts__inner">
         <div className="contacts__info">
           <img src={logo} alt="logo" className="contacts__logo" />

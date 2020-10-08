@@ -32,3 +32,7 @@ $mobile-menu-transition: all 0.3s ease-out;
 // z-i
 $header-z-i: 10;
 $mob-menu-z-i: 10;
+
+:export {
+  headerHeight: $header-height;
+}

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { FaExchangeAlt } from "react-icons/fa";
@@ -7,8 +7,9 @@ import Spinner from "../Spinner/Spinner";
 import ExchangeData from "../ExchangeData/ExchangeData";
 
 import { RootState } from "../../store/store";
-
 import * as currencyActions from "../../store/actions/currencyActions/currencyActionCreators";
+
+import { scrollToNode } from "../../utils/ts/helperFunctions";
 
 import ImgBTC from "../../assets/img/BTC.png";
 import ImgETH from "../../assets/img/ETH.png";
@@ -22,6 +23,8 @@ import { Currency } from "../../models/currency";
 
 const Calculator: React.FC = () => {
   const dispatch = useDispatch();
+
+  const calcSection = useRef<HTMLElement>(null!);
 
   const currenciesFromCustomer = useSelector(
     (state: RootState) => state.currenciesState.currenciesFromCustomer
@@ -41,6 +44,8 @@ const Calculator: React.FC = () => {
   const currencyToCustomerAmount = useSelector(
     (state: RootState) => state.currenciesState.currencyToCustomerAmount
   );
+
+  const scrollToCalc = useSelector((state: RootState) => state.scrollState.scrollToCalc);
 
   const [isFetchingBinanceData, setIsFetchingBinanceData] = useState(true);
   const [isFetchingOwnData, setIsFetchingOwnData] = useState(true);
@@ -154,6 +159,12 @@ const Calculator: React.FC = () => {
     fetchOwnData();
   }, [fetchBinanceData, fetchOwnData]);
 
+  useEffect(() => {
+    if (calcSection.current) {
+      scrollToNode(calcSection.current);
+    }
+  }, [scrollToCalc]);
+
   if (isFetchingBinanceData || isFetchingOwnData) {
     return (
       <section className="calculator-section">
@@ -165,7 +176,7 @@ const Calculator: React.FC = () => {
   }
 
   return (
-    <section className="calculator-section">
+    <section className="calculator-section" ref={calcSection}>
       <div className="calculator-section__inner">
         <div className="calculator">
           <ExchangeData

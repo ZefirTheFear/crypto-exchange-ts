@@ -6,7 +6,7 @@ import { RootState } from "../../store/store";
 
 import "./CalculatorTable.scss";
 
-const TableForCalc = () => {
+const TableForCalc: React.FC = () => {
   const percentages = useSelector((state: RootState) => state.currenciesState.percentages);
   const currencies = useSelector((state: RootState) => [
     ...state.currenciesState.currenciesFromCustomer,
@@ -76,7 +76,9 @@ const TableForCalc = () => {
                 </div>
               );
             })}
-            <div className="table-for-calc__footer">от $100 000 индивидуальные условия</div>
+            <div className="table-for-calc__footer">
+              от ${percentages[percentages.length - 1].amountTo + 1} индивидуальные условия
+            </div>
           </div>
         </div>
       </div>

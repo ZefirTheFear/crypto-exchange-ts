@@ -1,6 +1,6 @@
 import cloneDeep from "clone-deep";
 
-import { convertCurrency } from "./../../utils/ts/helperFunctions";
+import { convertCurrency, validate } from "./../../utils/ts/helperFunctions";
 import { Currency } from "./../../models/currency";
 import * as currencyActionTypes from "../actions/currencyActions/currencyActionTypes";
 
@@ -64,7 +64,7 @@ export default (
       const newCurrencyFromCustomer = action.payload.currency;
 
       const newCurrencyToCustomerAmount = convertCurrency(
-        +state.currencyFromCustomerAmount,
+        state.currencyFromCustomerAmount,
         newCurrencyFromCustomer,
         state.currentCurrencyToCustomer,
         state.percentages,
@@ -83,7 +83,7 @@ export default (
       const newCurrencyToCustomer = action.payload.currency;
 
       const newCurrencyFromCustomerAmount = convertCurrency(
-        +state.currencyToCustomerAmount,
+        state.currencyToCustomerAmount,
         newCurrencyToCustomer,
         state.currentCurrencyFromCustomer,
         state.percentages,
@@ -111,7 +111,7 @@ export default (
         currencyFromCustomerAmount:
           state.lastModifiedField === "FROM"
             ? convertCurrency(
-                +state.currencyFromCustomerAmount,
+                state.currencyFromCustomerAmount,
                 state.currentCurrencyFromCustomer,
                 state.currentCurrencyToCustomer,
                 state.percentages,
@@ -123,7 +123,7 @@ export default (
           state.lastModifiedField === "FROM"
             ? state.currencyFromCustomerAmount
             : convertCurrency(
-                +state.currencyToCustomerAmount,
+                state.currencyToCustomerAmount,
                 state.currentCurrencyToCustomer,
                 state.currentCurrencyFromCustomer,
                 state.percentages,
@@ -137,7 +137,7 @@ export default (
     case currencyActionTypes.CHANGE_CURRENCY_FROM_CUSTOMER_AMOUNT: {
       // TODO Input Validation
       const newCurrencyToCustomerAmount = convertCurrency(
-        +action.payload.amount,
+        action.payload.amount,
         state.currentCurrencyFromCustomer,
         state.currentCurrencyToCustomer,
         state.percentages,
@@ -147,7 +147,7 @@ export default (
 
       return {
         ...state,
-        currencyFromCustomerAmount: action.payload.amount,
+        currencyFromCustomerAmount: validate(action.payload.amount),
         currencyToCustomerAmount: newCurrencyToCustomerAmount,
         lastModifiedField: "FROM"
       };
@@ -156,7 +156,7 @@ export default (
     case currencyActionTypes.CHANGE_CURRENCY_TO_CUSTOMER_AMOUNT: {
       // TODO Input Validation
       const newCurrencyFromCustomerAmount = convertCurrency(
-        +action.payload.amount,
+        action.payload.amount,
         state.currentCurrencyToCustomer,
         state.currentCurrencyFromCustomer,
         state.percentages,
@@ -167,7 +167,7 @@ export default (
       return {
         ...state,
         currencyFromCustomerAmount: newCurrencyFromCustomerAmount,
-        currencyToCustomerAmount: action.payload.amount,
+        currencyToCustomerAmount: validate(action.payload.amount),
         lastModifiedField: "TO"
       };
     }

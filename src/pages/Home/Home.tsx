@@ -5,7 +5,7 @@ import MenuMobile from "../../components/MenuMobile/MenuMobile";
 import Attention from "../../components/Attention/Attension";
 import Hero from "../../components/Hero/Hero";
 import Calculator from "../../components/Calculator/Calculator";
-// import Exchange from "../../components/Exchange/Exchange";
+import Exchange from "../../components/Exchange/Exchange";
 import AboutUs from "../../components/AboutUs/AboutUs";
 import Contacts from "../../components/Contacts/Contacts";
 // import ExchangeKiev from "../../components/ExchangeKiev/ExchangeKiev";
@@ -24,8 +24,7 @@ const Home: React.FC = () => {
       {isAttentionOpen ? <Attention closeAttention={closeAttention} /> : null}
       <Hero />
       <Calculator />
-
-      {/* <Exchange /> */}
+      <Exchange />
       <AboutUs />
       <Contacts />
       {/* <ExchangeKiev /> */}

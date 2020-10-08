@@ -1,12 +1,22 @@
-import React, { useMemo } from "react";
+import React, { useRef, useMemo, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import securityImg from "../../assets/img/security-first.svg";
 import bestPriceImg from "../../assets/img/best-prices.svg";
 import longTermImg from "../../assets/img/long-term.svg";
 
+import { RootState } from "../../store/store";
+
+import { scrollToNode } from "../../utils/ts/helperFunctions";
+
 import "./AboutUs.scss";
 
 const AboutUs: React.FC = () => {
+  const aboutUsSection = useRef<HTMLElement>(null!);
+  const isMount = useRef(false);
+
+  const scrollToAboutUs = useSelector((state: RootState) => state.scrollState.scrollToAboutUs);
+
   const data = useMemo(() => {
     return [
       {
@@ -33,8 +43,15 @@ const AboutUs: React.FC = () => {
     ];
   }, []);
 
+  useEffect(() => {
+    if (isMount.current && aboutUsSection.current) {
+      scrollToNode(aboutUsSection.current);
+    }
+    isMount.current = true;
+  }, [scrollToAboutUs]);
+
   return (
-    <section className="about-us">
+    <section className="about-us" ref={aboutUsSection}>
       <div className="about-us__inner">
         {data.map((item) => {
           return (

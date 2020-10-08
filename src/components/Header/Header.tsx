@@ -21,7 +21,7 @@ const Header: React.FC = () => {
 
   const logoClick = useCallback(() => {
     window.scrollTo({
-      top: 100,
+      top: 0,
       behavior: "smooth"
     });
     dispatch(mobileMenuActions.closeMobileMenu());

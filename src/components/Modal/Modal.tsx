@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 
 import "./Modal.scss";
 
-const Modal = props => {
+interface ModalProps {
+  text: string;
+  closeModal: () => void;
+}
+
+const Modal: React.FC<ModalProps> = ({ text, closeModal }) => {
   useEffect(() => {
     document.documentElement.style.overflow = "hidden";
   }, []);
@@ -16,8 +21,8 @@ const Modal = props => {
   return (
     <div className="modal-bg">
       <div className="modal">
-        <p className="modal__text">{props.text}</p>
-        <button type="button" className="modal__btn" onClick={props.closeModal}>
+        <p className="modal__text">{text}</p>
+        <button type="button" className="modal__btn" onClick={closeModal}>
           ок
         </button>
       </div>

@@ -26,8 +26,6 @@ const ExchangeData: React.FC<ExchangeDataProps> = ({
   value,
   onChangeInputAmount
 }) => {
-  console.log("ExchangeData render");
-
   const dispatch = useDispatch();
 
   const closeOptions = useSelector((state: RootState) => state.currenciesState.closeOptions);

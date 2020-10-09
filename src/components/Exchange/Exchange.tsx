@@ -12,8 +12,6 @@ import { scrollToNode } from "../../utils/ts/helperFunctions";
 import "./Exchange.scss";
 
 const Exchange: React.FC = () => {
-  console.log("Exchange render");
-
   const dispatch = useDispatch();
 
   const exchangeSection = useRef<HTMLElement>(null!);
@@ -68,12 +66,12 @@ const Exchange: React.FC = () => {
       }
 
       try {
-        // const response = await fetch(
-        //   `https://api.telegram.org/bot957327615:AAH0MITHU3soRisXfcZZmnHSgI9RqoqBTdo/sendMessage?chat_id=174294535&text=${name} - ${number} ждет звонок`
-        // );
         const response = await fetch(
-          `https://api.telegram.org/bot957327615:AAH0MITHU3soRisXfcZZmnHSgI9RqoqBTdo/sendMessage?chat_id=448641137&text=${name} - ${number} ждет звонок`
+          `https://api.telegram.org/bot957327615:AAH0MITHU3soRisXfcZZmnHSgI9RqoqBTdo/sendMessage?chat_id=174294535&text=${name} - ${number} ждет звонок`
         );
+        // const response = await fetch(
+        //   `https://api.telegram.org/bot957327615:AAH0MITHU3soRisXfcZZmnHSgI9RqoqBTdo/sendMessage?chat_id=448641137&text=${name} - ${number} ждет звонок`
+        // );
         if (response.status !== 200) {
           setIsLoading(false);
           return setIsFetchingError(true);

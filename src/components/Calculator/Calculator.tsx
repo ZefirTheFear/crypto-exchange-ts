@@ -24,8 +24,6 @@ import ImgUAH from "../../assets/img/uah.png";
 import "./Calculator.scss";
 
 const Calculator: React.FC = () => {
-  console.log("Calculator render");
-
   const dispatch = useDispatch();
 
   const calcSection = useRef<HTMLElement>(null!);
@@ -127,7 +125,7 @@ const Calculator: React.FC = () => {
         return setIsFetchingError(true);
       }
       let resData: {
-        cryptoPercentage: {};
+        cryptoPercentages: {};
         usd: { buy: { rate: number }; sell: { rate: number } };
       } = await response.json();
       console.log(resData);
@@ -146,7 +144,7 @@ const Calculator: React.FC = () => {
         }
       ];
       dispatch(currencyActions.setCurrenciesToCustomer(newCurrenciesToCustomer));
-      // dispatch(currencyActions.setPercentages(Object.values(resData.cryptoPercentage)));
+      // dispatch(currencyActions.setPercentages(Object.values(resData.cryptoPercentages)));
       setIsFetchingOwnData(false);
     } catch (error) {
       return setIsFetchingError(true);

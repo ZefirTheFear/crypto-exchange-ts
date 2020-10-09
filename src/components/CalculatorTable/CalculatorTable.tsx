@@ -7,8 +7,6 @@ import { RootState } from "../../store/store";
 import "./CalculatorTable.scss";
 
 const TableForCalc: React.FC = () => {
-  console.log("TableForCalc render");
-
   const percentages = useSelector((state: RootState) => state.currenciesState.percentages);
   const currenciesFrom = useSelector(
     (state: RootState) => state.currenciesState.currenciesFromCustomer

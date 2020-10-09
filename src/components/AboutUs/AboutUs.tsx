@@ -12,8 +12,6 @@ import { scrollToNode } from "../../utils/ts/helperFunctions";
 import "./AboutUs.scss";
 
 const AboutUs: React.FC = () => {
-  console.log("AboutUs render");
-
   const aboutUsSection = useRef<HTMLElement>(null!);
   const isMount = useRef(false);
 

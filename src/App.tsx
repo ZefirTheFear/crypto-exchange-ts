@@ -1,17 +1,15 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import smoothscroll from "smoothscroll-polyfill";
 
 import Home from "./pages/Home/Home";
-import Article from "./pages/Article/Article";
 
+smoothscroll.polyfill();
 const App: React.FC = () => {
-  console.log("App render");
-
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/obmen-kriptovalyut" component={Article} />
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>

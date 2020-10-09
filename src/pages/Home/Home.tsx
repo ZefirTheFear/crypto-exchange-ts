@@ -11,8 +11,6 @@ import Contacts from "../../components/Contacts/Contacts";
 // import ExchangeKiev from "../../components/ExchangeKiev/ExchangeKiev";
 
 const Home: React.FC = () => {
-  console.log("Home render");
-
   const [isAttentionOpen, setIsAttentionOpen] = useState(true);
 
   const closeAttention = useCallback(() => {

@@ -6,8 +6,6 @@ import logoWords from "../../assets/img/logo_words.svg";
 import "./Hero.scss";
 
 const Hero: React.FC = () => {
-  console.log("Hero render");
-
   return (
     <section className="hero">
       <div className="hero__inner">

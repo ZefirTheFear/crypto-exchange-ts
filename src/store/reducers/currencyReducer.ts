@@ -39,14 +39,7 @@ const initialState: CurrencyState = {
   },
   currencyFromCustomerAmount: "",
   currencyToCustomerAmount: "",
-  percentages: [
-    { amountFrom: 0, amountTo: 999, percentBuyCrypto: -4, percentSaleCrypto: 4 },
-    { amountFrom: 1000, amountTo: 4999, percentBuyCrypto: -2, percentSaleCrypto: 3 },
-    { amountFrom: 5000, amountTo: 9999, percentBuyCrypto: -1, percentSaleCrypto: 2 },
-    { amountFrom: 10000, amountTo: 19999, percentBuyCrypto: -0.5, percentSaleCrypto: 0.8 },
-    { amountFrom: 20000, amountTo: 49999, percentBuyCrypto: -0.5, percentSaleCrypto: 0.7 },
-    { amountFrom: 50000, amountTo: 99999, percentBuyCrypto: -0.5, percentSaleCrypto: 0.6 }
-  ],
+  percentages: [],
   lastModifiedField: "FROM"
 };
 

@@ -6,7 +6,7 @@ import { RootState } from "../../store/store";
 
 import "./CalculatorTable.scss";
 
-const TableForCalc: React.FC = () => {
+const CalculatorTable: React.FC = () => {
   const percentages = useSelector((state: RootState) => state.currenciesState.percentages);
   const currenciesFrom = useSelector(
     (state: RootState) => state.currenciesState.currenciesFromCustomer
@@ -78,4 +78,4 @@ const TableForCalc: React.FC = () => {
   );
 };
 
-export default TableForCalc;
+export default CalculatorTable;

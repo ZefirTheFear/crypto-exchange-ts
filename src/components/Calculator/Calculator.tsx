@@ -144,7 +144,7 @@ const Calculator: React.FC = () => {
         }
       ];
       dispatch(currencyActions.setCurrenciesToCustomer(newCurrenciesToCustomer));
-      // dispatch(currencyActions.setPercentages(Object.values(resData.cryptoPercentages)));
+      dispatch(currencyActions.setPercentages(Object.values(resData.cryptoPercentages)));
       setIsFetchingOwnData(false);
     } catch (error) {
       return setIsFetchingError(true);

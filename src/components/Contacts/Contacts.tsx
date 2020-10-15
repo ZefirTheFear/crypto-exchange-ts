@@ -25,12 +25,12 @@ const Contacts: React.FC = () => {
     window.open(link);
   }, []);
 
-  const data = useMemo(() => {
+  const contacts = useMemo(() => {
     return [
       {
         title: "address",
         icon: <FaMapMarkerAlt />,
-        desc: "Киев, Оболонский пр, 14Б"
+        desc: "Киев, Оболонский пр, 14"
       },
       {
         title: "phone",
@@ -71,7 +71,7 @@ const Contacts: React.FC = () => {
         <div className="contacts__info">
           <img src={logo} alt="logo" className="contacts__logo" />
           <div>
-            {data.map((item) => {
+            {contacts.map((item) => {
               if (item.title === "phone") {
                 return (
                   <a
